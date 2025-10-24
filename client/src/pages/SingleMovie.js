@@ -55,11 +55,11 @@ const SingleMovie = () => {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [getData]);
 
   useEffect(() => {
     getAllTheatres();
-  }, [date]);
+  }, [getAllTheatres]);
 
   return (
     <>
