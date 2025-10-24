@@ -14,19 +14,18 @@ function Login() {
 
   const onFinish = async (values) => {
     try {
-      const response = await LoginUser(values);
-      if (response.success) {
-        message.success(response.message);
-        localStorage.setItem('token', response.token);
-        navigate('/');
-      } else {
-        message.error(response.message);
-      }
+        const response = await axios.post('/api/users/login', values);
+        if(response.data && response.data.success) { // Check response.data exists
+            // handle successful login
+        } else {
+            // handle unsuccessful login
+            message.error(response.data?.message || 'Login failed');
+        }
     } catch (error) {
-      message.error(error.message);
+        // handle error
+        message.error(error.response?.data?.message || 'Login failed');
     }
-  };
-
+};
   return (
     <>
       <header className="App-header">
