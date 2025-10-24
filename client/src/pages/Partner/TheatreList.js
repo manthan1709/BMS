@@ -91,7 +91,7 @@ const TheatreList = () => {
 
       useEffect(() => {
         getData();
-      }, [])
+      }, [getData])
 
     return(
         <>
