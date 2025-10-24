@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { axiosInstance } from '../calls/index'; // Add this import
 import { Button, Form, Input, message } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -16,7 +16,7 @@ function Login() {
   const onFinish = async (values) => {
     try {
       setLoading(true);
-      const response = await axios.post('/api/users/login', values);
+      const response = await axiosInstance.post('/api/users/login', values); // Changed from axios to axiosInstance
       if(response.data && response.data.success) {
         message.success('Login successful!');
         localStorage.setItem('token', response.data.token);
