@@ -1,31 +1,36 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Button, Form, Input, message } from "antd";
 import { Link, useNavigate } from "react-router-dom";
-import { LoginUser } from '../calls/users';
 
 function Login() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if(localStorage.getItem('token')){
-        navigate("/");
+      navigate("/");
     }
   }, [navigate]); 
 
   const onFinish = async (values) => {
     try {
-        const response = await axios.post('/api/users/login', values);
-        if(response.data && response.data.success) { // Check response.data exists
-            // handle successful login
-        } else {
-            // handle unsuccessful login
-            message.error(response.data?.message || 'Login failed');
-        }
+      setLoading(true);
+      const response = await axios.post('/api/users/login', values);
+      if(response.data && response.data.success) {
+        message.success('Login successful!');
+        localStorage.setItem('token', response.data.token);
+        navigate('/');
+      } else {
+        message.error(response.data?.message || 'Login failed');
+      }
     } catch (error) {
-        // handle error
-        message.error(error.response?.data?.message || 'Login failed');
+      message.error(error.response?.data?.message || 'Login failed');
+    } finally {
+      setLoading(false);
     }
-};
+  };
+
   return (
     <>
       <header className="App-header">
@@ -57,7 +62,13 @@ function Login() {
               </Form.Item>
 
               <Form.Item className="d-block">
-                <Button type="primary" block htmlType="submit" style={{ fontSize: "1rem", fontWeight: "600" }}>
+                <Button 
+                  type="primary" 
+                  block 
+                  htmlType="submit"
+                  loading={loading}
+                  style={{ fontSize: "1rem", fontWeight: "600" }}
+                >
                   Login
                 </Button>
               </Form.Item>
