@@ -30,7 +30,7 @@ const Bookings = () => {
 
     useEffect(() => {
         getData();
-    }, []);
+    }, [getData]);
 
 
     return(
