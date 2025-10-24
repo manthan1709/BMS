@@ -197,7 +197,7 @@ const ShowModal = ({
 
   useEffect(() => {
     getData();
-  }, [getData]);
+  }, []);
 
   return (
     <Modal

@@ -24,7 +24,7 @@ function Reset() {
         if (localStorage.getItem('token')) {
             navigate("/");
         }
-    }, [navigate])
+    }, [])
     return (
         <>
             <header className="App-header">

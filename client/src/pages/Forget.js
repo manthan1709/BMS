@@ -26,7 +26,7 @@ function Forget() {
         if (localStorage.getItem('token')) {
             navigate("/");
         }
-    }, [getData])
+    }, [])
     return (
         <>
             <header className="App-header">
