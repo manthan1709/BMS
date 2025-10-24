@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Button, Form, Input } from "antd";
 import { Link, useNavigate } from "react-router-dom";
-import { ForgetPassword, LoginUser } from '../calls/users';
+import { ForgetPassword } from '../calls/users';
 import { message } from 'antd'
 
 function Forget() {
@@ -26,7 +26,7 @@ function Forget() {
         if (localStorage.getItem('token')) {
             navigate("/");
         }
-    }, [])
+    }, [getData])
     return (
         <>
             <header className="App-header">
