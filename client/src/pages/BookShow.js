@@ -193,7 +193,7 @@ const BookShow = () => {
                   amount={selectedSeats.length * show.ticketPrice*100}
             
         
-                  stripeKey="pk_test_51SLhwNPowzlVvaTKhpyFjmyUvHUoZjQE1WwMIzxrCfhgDwWbyLMXy4yLi4IJyU2LkRuWqdOvYZqVQAc2w5g0mzHb00QNAtuLmf"
+                  stripeKey="pk_test_51SLhwNPowzlVvaTKhoOrrxhEJVBXIJytgPv2qNBBFNrCa2vJXgQDcyonmNXtlCplnOkvSlhKrPEjF0Irkz6TPP8V009KoJptwj"
                 >
                   {/* Use this one in some situation=> pk_test_eTH82XLklCU1LJBkr2cSDiGL001Bew71X8  */}
                   <div className="max-width-600 mx-auto">
