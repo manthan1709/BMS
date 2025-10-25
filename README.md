@@ -15,16 +15,143 @@ Use these credentials to log in as an Admin and access the admin dashboard at `/
 
 Book My Show is a comprehensive movie ticket booking system built with the MERN stack (MongoDB, Express, React, Node.js). It supports three user roles: Admin, Theatre Partner, and Regular User.
 
-### Key Features
+### Application Workflow
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                       BOOK MY SHOW WORKFLOW DIAGRAM                         │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+ADMIN FLOW:
+─────────────────────────────────────────────────────────────────────────────
+  1. Admin Logs In (mk@gmail.com / 12345678)
+       ↓
+  2. Admin Dashboard → Movies Management
+       ↓
+  3. ✅ Add/Edit/Delete Movies
+       ├─ Movie Title, Description, Duration
+       ├─ Genre, Language, Release Date
+       └─ Poster URL
+       ↓
+  4. Admin Dashboard → Theatres Management
+       ↓
+  5. View All Theatre Registration Requests from Partners
+       ↓
+  6. ✅ Approve or Block Theatres
+       └─ Only APPROVED theatres can proceed
+       ↓
+  7. Theatre Status: Pending → Approved → Active
+
+
+PARTNER FLOW:
+─────────────────────────────────────────────────────────────────────────────
+  1. Partner Registers Account
+       ↓
+  2. Partner Logs In
+       ↓
+  3. Partner Dashboard → Theatres Management
+       ↓
+  4. ✅ Add Theatre
+       ├─ Theatre Name, Address
+       ├─ Phone, Email
+       └─ Status: PENDING (Waiting for Admin Approval)
+       ↓
+  5. ⏳ Wait for Admin Approval
+       ↓
+  6. Once Admin Approves Theatre (Status: APPROVED)
+       ↓
+  7. ✅ Theatre Status Changes to ACTIVE
+       ↓
+  8. ✅ Now can Add Shows to Theatre
+       ├─ Show Name, Date & Time
+       ├─ Select Movie (from movies added by Admin)
+       ├─ Ticket Price, Total Seats
+       └─ Show is now LIVE
+       ↓
+  9. ✅ Can Edit/Delete Shows
+       ↓
+  10. View Real-time Bookings and Seat Status
+
+
+USER FLOW:
+─────────────────────────────────────────────────────────────────────────────
+  1. User Registers Account
+       ↓
+  2. User Logs In
+       ↓
+  3. Browse Home Page
+       ↓
+  4. ✅ Search/View All Available Movies
+       ↓
+  5. Select a Movie → View Movie Details
+       ↓
+  6. Select Date to Book Show
+       ↓
+  7. View All Theatres Showing This Movie on Selected Date
+       ↓
+  8. Select a Theatre & Time Slot
+       ↓
+  9. ✅ Seat Selection Page
+       ├─ View Interactive Seat Layout
+       ├─ See Booked Seats (Red)
+       ├─ See Available Seats (Gray)
+       ├─ Select Desired Seats
+       └─ See Real-time Price Calculation
+       ↓
+  10. Proceed to Payment
+       ↓
+  11. ✅ Stripe Payment Gateway
+       ├─ Enter Card Details
+       ├─ Process Payment (Secure)
+       └─ Transaction ID Generated
+       ↓
+  12. ✅ Booking Confirmed
+       ├─ Email Ticket Confirmation
+       ├─ Show Booking Details
+       └─ Seats Reserved
+       ↓
+  13. View Bookings in Profile
+       ↓
+  14. Receive Email with Ticket Details
+
+
+COMPLETE FLOW SUMMARY:
+─────────────────────────────────────────────────────────────────────────────
+
+    ADMIN                      PARTNER                      USER
+       │                           │                         │
+       ├─→ Add Movies ───────┐     │                         │
+       │                     │     │                         │
+       │                     ├────→├─ Register Theatre       │
+       │                     │     │   (Pending)             │
+       │                     │     │                         │
+       ├─→ Approve Theatre ──┼────→├─ Theatre Approved       │
+       │                     │     │   (Status: Active)      │
+       │                     │     │                         │
+       │                     │     ├─→ Add Shows             │
+       │                     │     │   (Now Visible to Users)
+       │                     │     │                         │
+       │                  ┌──┴─────┴─────────────────────────┤
+       │                  │                                  │
+       └──────────────────┴──→ USER BROWSING & BOOKING      │
+                              Movies → Theatres → Shows      │
+                              Select Seats → Pay via Stripe  │
+                              Get Email Confirmation         │
+```
+
+## Key Features
 
 - **User Authentication**: Secure registration, login, and password reset functionality
-- **Movie Management**: Browse available movies with details (genre, language, duration)
+- **Movie Management**: Admin can add/edit/delete movies with full details
+- **Theatre Approval System**: Admin must approve theatres before they go live
+- **Show Management**: Partners can only add shows to approved theatres
 - **Show Booking**: View available shows across theatres and select preferred seats
 - **Seat Selection**: Interactive seat picker with real-time availability
 - **Payment Integration**: Stripe payment gateway for secure transactions
-- **Email Notifications**: Automated ticket confirmation emails
-- **Role-Based Access**: Different dashboards for Admin, Partner, and Users
-- **Theatre Management**: Partners can add and manage their theatres and shows
+- **Email Notifications**: Automated ticket confirmation emails with booking details
+- **Role-Based Access**: Different dashboards and workflows for Admin, Partner, and Users
+- **Theatre Management**: Partners can add and manage theatres and shows
+- **Real-time Status Updates**: Theatre approval status, seat availability, and booking updates
 
 ## Tech Stack
 
@@ -383,6 +510,17 @@ npm start
 - Mobile app support
 - Real-time seat updates with WebSockets
 
-##by
+## Contributing
+
+Contributions are welcome! Please follow these guidelines:
+1. Fork the repository
+2. Create a feature branch
+3. Commit changes with clear messages
+4. Push to the branch
+5. Create a pull request
+
+## BY
 -Manthan Kalra
 -24bcs10478
+
+
